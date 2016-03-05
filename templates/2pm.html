@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">  
+  <script type="text/javascript" src="/static/js/jquery-latest.js"></script>
+  <script type="text/javascript" src="/static/js/jquery.tablesorter.js"></script>
+  <script type="text/javascript" src="/static/js/javascript.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/css/pods.css">
+  <title>Dashboard: Sales &amp; Ops</title>
+</head>
+<body>
+ <div id="container">
+   <div id="content">
+    <div class="table-title" style="height:80px">
+    <div style="width:1000px;height:70px;margin-left:auto;margin-right:auto">
+      <h1 style="margin-top:15px;float:left">Look Back: <span style="color:red">{{ week }}</span></h1>
+      <p style="float:right;margin-top:-5px;font-size:12pt;font-weight:bold">Look Back | <a href="{{ url_for('two_pm_ahead') }}">Look Ahead</a><p>
+    </div>
+    </div>
+    <div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:20px;height:60px">
+      <form action="/" method="post" style="width:130px">
+       <select name="period" onchange="this.form.submit();" style="width:140px;height:30px;border: 1px solid white;font-family:Trebuchet MS;text-indent:5px">
+        <option value="lastweek" disabled selected>Change Period...</option>
+        <option value="lastweek">Last Week</option>
+        <option value="twoweeksago">Two Weeks Ago</option>
+        <option value="pastmonth">Past Month</option>
+        <option value="yeartodate">Year To Date</option>
+      </select>
+    </form>
+  </div>
+  <div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+    <table class="tablesorter myTable" style="float:left;width:140px;box-shadow:none;font-size:12pt;margin-bottom:10px">
+      <tr>
+        <th style="text-align:left;text-indent:10px;color:red">Sales</th>
+      </tr>
+    </table>
+  </div>
+
+  <table class="tablesorter myTable" style="margin-bottom:0px;margin-top:0px;margin-bottom:40px">
+    <thead>
+     <tr style="font-weight:bold">
+      <th style="text-align:left;text-indent:20px;width:80px">County</th>
+      <th style="width:107px">Sales</th>
+      <th style="width:107px">Survey Queue</th>
+      <th style="width:107px">Design Queue</th>
+      <th style="width:107px">Design Done</th>
+      <th style="width:107px">Bad Roof</th>
+      <th style="width:107px">Cancelled</th>
+      <th style="width:107px">Good To Go</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left;text-indent:20px">Suffolk</td>
+      <td>{{ info["sales"]["Suffolk"]["sales"] }}</td>
+      <td>{{ info["sales"]["Suffolk"]["ssq"] }}</td>
+      <td>{{ info["sales"]["Suffolk"]["adq"] }}</td>
+      <td>{{ info["sales"]["Suffolk"]["designed"] }}</td>
+      <td>{{ info["sales"]["Suffolk"]["bad_roof"] }}</td>
+      <td>{{ info["sales"]["Suffolk"]["cancelled"] }}</td>
+      <td>{{ info["sales"]["Suffolk"]["g2g"] }}</td>
+    </tr>
+    <tr>
+      <td style="text-align:left;text-indent:20px">Nassau</td>
+      <td>{{ info["sales"]["Nassau"]["sales"] }}</td>
+      <td>{{ info["sales"]["Nassau"]["ssq"] }}</td>
+      <td>{{ info["sales"]["Nassau"]["adq"] }}</td>
+      <td>{{ info["sales"]["Nassau"]["designed"] }}</td>
+      <td>{{ info["sales"]["Nassau"]["bad_roof"] }}</td>
+      <td>{{ info["sales"]["Nassau"]["cancelled"] }}</td>
+      <td>{{ info["sales"]["Nassau"]["g2g"] }}</td>
+    </tr>
+    <tr>
+      <td style="text-align:left;text-indent:20px">Richmond</td>
+      <td>{{ info["sales"]["Richmond"]["sales"] }}</td>
+      <td>{{ info["sales"]["Richmond"]["ssq"] }}</td>
+      <td>{{ info["sales"]["Richmond"]["adq"] }}</td>
+      <td>{{ info["sales"]["Richmond"]["designed"] }}</td>
+      <td>{{ info["sales"]["Richmond"]["bad_roof"] }}</td>
+      <td>{{ info["sales"]["Richmond"]["cancelled"] }}</td>
+      <td>{{ info["sales"]["Richmond"]["g2g"] }}</td>
+    </tr>
+    <tr>
+      <td style="text-align:left;text-indent:20px">Queens</td>
+      <td>{{ info["sales"]["Queens"]["sales"] }}</td>
+      <td>{{ info["sales"]["Queens"]["ssq"] }}</td>
+      <td>{{ info["sales"]["Queens"]["adq"] }}</td>
+      <td>{{ info["sales"]["Queens"]["designed"] }}</td>
+      <td>{{ info["sales"]["Queens"]["bad_roof"] }}</td>
+      <td>{{ info["sales"]["Queens"]["cancelled"] }}</td>
+      <td>{{ info["sales"]["Queens"]["g2g"] }}</td>
+    </tr>
+    <tr>
+      <td style="text-align:left;text-indent:20px;font-weight:bold">Total</td>
+      <td style="font-weight:bold">{{ info["sales"]["total"]["sales"] }}</td>
+      <td style="font-weight:bold">{{ info["sales"]["total"]["ssq"] }}</td>
+      <td style="font-weight:bold">{{ info["sales"]["total"]["adq"] }}</td>
+      <td style="font-weight:bold">{{ info["sales"]["total"]["designed"] }}</td>
+      <td style="font-weight:bold">{{ info["sales"]["total"]["bad_roof"] }}</td>
+      <td style="font-weight:bold">{{ info["sales"]["total"]["cancelled"] }}</td>
+      <td style="font-weight:bold">{{ info["sales"]["total"]["g2g"] }}</td>
+    </tr>
+  </tbody>
+</table>
+<div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+  <table class="tablesorter myTable" style="float:left;width:140px;box-shadow:none;font-size:12pt">
+    <tr>
+      <th style="text-align:left;text-indent:10px;color:red">CADs</th>
+    </tr>
+  </table>
+</div>
+<table class="tablesorter myTable" style="margin-bottom:40px;margin-top:0px">
+  <thead>
+   <tr style="font-weight:bold">
+    <th style="text-align:left;text-indent:20px;width:80px">County</th>
+    <th style="width:107px">Outcomes</th>
+    <th style="width:107px">G2G</th>
+    <th style="width:107px">Design Change</th>
+    <th style="width:107px">NMT</th>
+    <th style="width:107px">Postponed</th>
+    <th style="width:107px">Cancelled</th>
+    <th style="width:107px">Rescheduled</th>
+  </tr>
+</thead>
+<tbody>
+  {% for item in info["cads"]["counties"] %}
+  <tr>
+    <td style="text-align:left;text-indent:20px">{{ item["county"] }}</td>
+    <td>{{ item["potential_g2g"] }}</td>
+    <td>{{ item["g2g"] }}</td>
+    <td>{{ item["designchange"] }}</td>
+    <td>{{ item["nmt"] }}</td>
+    <td>{{ item["postponed"] }}</td>
+    <td>{{ item["cancelled"] }}</td>
+    <td>{{ item["rescheduled"] }}</td>
+  </tr>
+  {% endfor %}
+  <tr>   
+    <tr style="font-weight:bold">
+      <td style="text-align:left;text-indent:20px">Total</td>
+      <td>{{ info["cads"]["total"]["potential_g2g"] }}</td>
+      <td>{{ info["cads"]["total"]["g2g"] }}</td>
+      <td>{{ info["cads"]["total"]["designchange"] }}</td>
+      <td>{{ info["cads"]["total"]["nmt"] }}</td>
+      <td>{{ info["cads"]["total"]["postponed"] }}</td>
+      <td>{{ info["cads"]["total"]["cancelled"] }}</td>
+      <td>{{ info["cads"]["total"]["rescheduled"] }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+  <table class="tablesorter myTable" style="float:left;width:140px;box-shadow:none;font-size:12pt">
+    <tr>
+      <th style="text-align:left;text-indent:10px;color:red">Permits</th>
+    </tr>
+  </table>
+</div>
+<table class="tablesorter myTable" style="margin-bottom:0px;margin-top:0px">
+  <thead>
+   <tr style="font-weight:bold">
+    <th style="text-align:left;text-indent:20px;width:80px">County</th>
+    <th style="width:107px">Submitted</th>
+    <th style="width:107px">Received</th>
+    <th style="width:107px">Pending*</th>
+    <th style="width:107px">In House*</th>
+  </tr>
+</thead>
+<tbody>
+  {% for item in info["permits"]["counties"] %}
+  <tr>
+    <td style="text-align:left;text-indent:20px">{{ item["county"] }}</td>
+    <td>{{ item["submitted"] }}</td>
+    <td>{{ item["received"] }}</td>
+    <td>{{ item["pending"] }}</td>
+    <td>{{ item["in_house"] }}</td>
+  </tr>
+  {% endfor %}
+  <tr>   
+    <tr style="font-weight:bold">
+      <td style="text-align:left;text-indent:20px">Total</td>
+      <td>{{ info["permits"]["total"]["submitted"] }}</td>
+      <td>{{ info["permits"]["total"]["received"] }}</td>
+      <td>{{ info["permits"]["total"]["pending"] }}</td>
+      <td>{{ info["permits"]["total"]["in_house"] }}</td>
+    </tr>
+  </tbody>
+</table>
+<div style="width:1000px;margin-left:auto;margin-right:auto;margin-top:10px;height:30px">
+    <table class="tablesorter myTable" style="float:right;height:20px;width:100px;box-shadow:none;font-size:10pt;margin-bottom:10px">
+      <tr>
+        <th style="text-align:center">*As of today</th>
+      </tr>
+    </table>
+</div>
+
+<div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+  <table class="tablesorter myTable" style="float:left;width:140px;box-shadow:none;font-size:12pt">
+    <tr>
+      <th style="text-align:left;text-indent:10px;color:red">Installs</th>
+    </tr>
+  </table>
+</div>
+<table class="tablesorter myTable" style="margin-bottom:0px;margin-top:0px">
+  <thead>
+   <tr style="font-weight:bold">
+    <th style="text-align:left;text-indent:20px;width:80px">County</th>
+    <th style="width:107px">Number</th>
+    <th style="width:107px">kW</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td style="text-align:left;text-indent:20px">Suffolk</td>
+    <td>#</td>
+    <td>#</td>
+  </tr>
+    <tr>
+    <td style="text-align:left;text-indent:20px">Nassau</td>
+    <td>#</td>
+    <td>#</td>
+  </tr>
+  <tr>   
+    <tr style="font-weight:bold">
+      <td style="text-align:left;text-indent:20px">Total</td>
+      <td>#</td>
+      <td>#</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

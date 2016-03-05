@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">  
+  <link rel="stylesheet" type="text/css" href="/static/css/sm.css">
+  <title>Dashboard: Sales &amp; Ops</title>
+</head>
+<body>
+
+  <div style="height:50px;margin-bottom:50px;width:735px;margin-left:auto;margin-right:auto">
+    <a href="http://104.131.100.182/sm" style="text-decoration:none">
+      <div id="navlink" style="margin-left:auto;float:left">
+        <p>Overview</p>
+      </div>
+    </a>
+    <a href="http://104.236.9.131/sm_amb/suffolk" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>Ambassadors</p>
+      </div>
+    </a>
+    <a href="" style="text-decoration:none">
+      <div id="navlink-active" style="border-left:none">
+        <p>Closers</p>
+      </div>
+    </a>
+    <a href="http://google.com" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>CAD Results</p>
+      </div>
+    </a>
+    <a href="http://google.com" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>Deal Review</p>
+      </div>
+    </a>
+    <a href="http://google.com" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>This Week</p>
+      </div>
+    </a>
+
+  </div>
+
+<div id="container">
+ <div id="content">
+
+  <div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+    <table class="tablesorter myTable" id="tabletitle" style="background-color:none;float:left;width:200px;box-shadow:none;font-size:12pt;margin-bottom:10px">
+      <tr>
+        <th style="text-align:left;text-indent:10px;color:red">Last Week</th>
+      </tr>
+    </table>
+  </div>
+
+  <table class="tablesorter myTable" style="margin-bottom:0px;margin-top:0px;margin-bottom:40px">
+    <thead>
+     <tr style="font-weight:bold">
+      <th style="text-align:left;text-indent:20px;width:130px">Closer</th>
+      <th style="text-align:center">Sales</th>
+      <th style="text-align:center">Assigned</th>
+      <th style="text-align:center">Sits</th>
+      <th style="text-align:center">Credits Run</th>
+      <th style="text-align:center">Run Rate</th>
+      <th style="text-align:center">Close Rate</th>
+      <th style="text-align:center">G2G</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="font-style:italic;text-align:left;text-indent:20px;height:40px;vertical-align:bottom">Suffolk</td>
+    </tr>
+    {% for item in info["Suffolk"]["closers"] %}
+    <tr>
+      <td style="width:80px;text-align:left;text-indent:30px">{{ item["closer"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["sales"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["assigned"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["sits"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["run_credit"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["run_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["close_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["g2g"] }}</td>
+    </tr>
+    {% endfor %}
+    <tr style="font-weight:bold">
+      <td style="width:80px;text-align:left;text-indent:30px">Subtotal</td>
+      <td style="width:80px;text-align:center">{{ info["Suffolk"]["total"]["sales"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Suffolk"]["total"]["assigned"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Suffolk"]["total"]["sits"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Suffolk"]["total"]["run_credit"]}}</td>
+      <td style="width:80px;text-align:center">{{ info["Suffolk"]["total"]["run_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Suffolk"]["total"]["close_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Suffolk"]["total"]["g2g"] }}</td>
+    </tr>
+        <tr>
+      <td style="font-style:italic;text-align:left;text-indent:20px;height:40px;vertical-align:bottom">Nassau</td>
+    </tr>
+    {% for item in info["Nassau"]["closers"] %}
+    <tr>
+      <td style="width:80px;text-align:left;text-indent:30px">{{ item["closer"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["sales"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["assigned"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["sits"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["run_credit"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["run_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["close_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["g2g"] }}</td>
+    </tr>
+    {% endfor %}
+    <tr style="font-weight:bold">
+      <td style="width:80px;text-align:left;text-indent:30px">Subtotal</td>
+      <td style="width:80px;text-align:center">{{ info["Nassau"]["total"]["sales"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Nassau"]["total"]["assigned"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Nassau"]["total"]["sits"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Nassau"]["total"]["run_credit"]}}</td>
+      <td style="width:80px;text-align:center">{{ info["Nassau"]["total"]["run_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Nassau"]["total"]["close_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Nassau"]["total"]["g2g"] }}</td>
+    </tr>
+        <tr>
+      <td style="font-style:italic;text-align:left;text-indent:20px;height:40px;vertical-align:bottom">Richmond</td>
+    </tr>
+    {% for item in info["Richmond"]["closers"] %}
+    <tr>
+      <td style="width:80px;text-align:left;text-indent:30px">{{ item["closer"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["sales"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["assigned"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["sits"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["run_credit"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["run_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["close_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ item["g2g"] }}</td>
+    </tr>
+    {% endfor %}
+    <tr style="font-weight:bold">
+      <td style="width:80px;text-align:left;text-indent:30px">Subtotal</td>
+      <td style="width:80px;text-align:center">{{ info["Richmond"]["total"]["sales"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Richmond"]["total"]["assigned"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Richmond"]["total"]["sits"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Richmond"]["total"]["run_credit"]}}</td>
+      <td style="width:80px;text-align:center">{{ info["Richmond"]["total"]["run_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Richmond"]["total"]["close_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["Richmond"]["total"]["g2g"] }}</td>
+    </tr>
+    <tr style="height:40px;vertical-align:bottom">
+      <td style="width:80px;text-align:left;text-indent:20px">Steven Elliott</td>
+      <td>{{ info["Elliott"]["sales"] }}</td>
+      <td colspan="5"></td>
+      <td>{{ info["Elliott"]["g2g"] }}</td>
+    </tr>
+    <tr style="font-weight:bold;height:40px;vertical-align:bottom">
+      <td style="width:80px;text-align:left;text-indent:20px">Total</td>
+      <td style="width:80px;text-align:center">{{ info["total"]["sales"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["total"]["assigned"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["total"]["sits"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["total"]["run_credit"]}}</td>
+      <td style="width:80px;text-align:center">{{ info["total"]["run_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["total"]["close_rate"] }}</td>
+      <td style="width:80px;text-align:center">{{ info["total"]["g2g"] }}</td>
+    </tr>
+    <tr>
+      <td></td>
+    </tr>
+
+  </tbody>
+</table>
+
+
+</div>
+</div>
+</body>
+</html>

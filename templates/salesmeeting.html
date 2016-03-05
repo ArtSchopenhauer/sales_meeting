@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">  
+  <link rel="stylesheet" type="text/css" href="/static/css/sm.css">
+  <title>Dashboard: Sales &amp; Ops</title>
+</head>
+<body>
+
+  <div style="height:50px;margin-bottom:50px;width:735px;margin-left:auto;margin-right:auto">
+    <a href="" style="text-decoration:none">
+      <div id="navlink-active" style="margin-left:auto;float:left">
+        <p>Overview</p>
+      </div>
+    </a>
+    <a href="http://104.236.9.131/sm_amb/suffolk" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>Ambassadors</p>
+      </div>
+    </a>
+    <a href="http://104.131.100.182/closers" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>Closers</p>
+      </div>
+    </a>
+    <a href="http://google.com" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>CAD Results</p>
+      </div>
+    </a>
+    <a href="http://google.com" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>Deal Review</p>
+      </div>
+    </a>
+    <a href="http://google.com" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>This Week</p>
+      </div>
+    </a>
+
+  </div>
+
+<div id="container">
+ <div id="content">
+
+  <div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+    <table class="tablesorter myTable" id="tabletitle" style="background-color:none;float:left;width:200px;box-shadow:none;font-size:12pt;margin-bottom:10px">
+      <tr>
+        <th style="text-align:left;text-indent:10px;color:red">Key Business Drivers</th>
+      </tr>
+    </table>
+  </div>
+
+  <table class="tablesorter myTable" style="margin-bottom:0px;margin-top:0px;margin-bottom:40px">
+    <thead>
+     <tr style="font-weight:bold">
+      <th style="text-align:left;text-indent:20px;width:80px">Metric</th>
+      {% for item in info["kbd"]["dates"] %}
+      <th style="width:107px">{{ item }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left;text-indent:20px;width:80px">Sales</td>
+      {% for item in info["kbd"]["sales"] %}
+      <td style="width:107px">{{ item }}</td>
+      {% endfor %}
+    </tr>
+    <tr>
+      <td style="text-align:left;text-indent:20px;width:80px">G2G</td>
+      {% for item in info["kbd"]["g2g"] %}
+      <td style="width:107px">{{ item }}</td>
+      {% endfor %}
+    </tr>
+    <tr>
+      <td style="text-align:left;text-indent:20px;width:80px">Permits</td>
+      {% for item in info["kbd"]["permits"] %}
+      <td style="width:107px">{{ item }}</td>
+      {% endfor %}
+    </tr>
+  </tbody>
+</table>
+
+<div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+  <table class="tablesorter myTable" style="float:left;width:200px;box-shadow:none;font-size:12pt;margin-bottom:10px">
+    <tr>
+      <th style="text-align:left;text-indent:10px;color:red">Gross Sales</th>
+    </tr>
+  </table>
+</div>
+
+<table class="tablesorter myTable" style="margin-bottom:0px;margin-top:0px;margin-bottom:40px">
+  <thead>
+   <tr style="font-weight:bold">
+    <th style="text-align:left;text-indent:20px;width:80px">Market</th>
+    {% for item in info["kbd"]["dates"] %}
+    <th style="width:107px">{{ item }}</th>
+    {% endfor %}
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px">Suffolk</td>
+    {% for item in info["gross"]["Suffolk"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px">Nassau</td>
+    {% for item in info["gross"]["Nassau"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px">Richmond</td>
+    {% for item in info["gross"]["Richmond"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px">Queens</td>
+    {% for item in info["gross"]["Queens"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px;font-weight:bold">Total</td>
+    {% for item in info["gross"]["total"] %}
+    <td style="width:107px;font-weight:bold">{{ item }}</td>
+    {% endfor %}
+  </tr>
+</tbody>
+</table>  
+
+<div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+  <table class="tablesorter myTable" style="float:left;width:200px;box-shadow:none;font-size:12pt;margin-bottom:10px">
+    <tr>
+      <th style="text-align:left;text-indent:10px;color:red">G2G's</th>
+    </tr>
+  </table>
+</div>
+
+<table class="tablesorter myTable" style="margin-bottom:0px;margin-top:0px;margin-bottom:40px">
+  <thead>
+   <tr style="font-weight:bold">
+    <th style="text-align:left;text-indent:20px;width:80px">Market</th>
+    {% for item in info["kbd"]["dates"] %}
+    <th style="width:107px">{{ item }}</th>
+    {% endfor %}
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px">Suffolk</td>
+    {% for item in info["g2g"]["Suffolk"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px">Nassau</td>
+    {% for item in info["g2g"]["Nassau"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px">Richmond</td>
+    {% for item in info["g2g"]["Richmond"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px">Queens</td>
+    {% for item in info["g2g"]["Queens"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px;font-weight:bold">Total</td>
+    {% for item in info["g2g"]["total"] %}
+    <td style="width:107px;font-weight:bold">{{ item }}</td>
+    {% endfor %}
+  </tr>
+</tbody>
+</table>  
+
+<div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+  <table class="tablesorter myTable" style="float:left;width:200px;box-shadow:none;font-size:12pt;margin-bottom:10px">
+    <tr>
+      <th style="text-align:left;text-indent:10px;color:red">Permits Submitted</th>
+    </tr>
+  </table>
+</div>
+
+<table class="tablesorter myTable" style="margin-bottom:0px;margin-top:0px;margin-bottom:40px">
+  <thead>
+   <tr style="font-weight:bold">
+    <th style="text-align:left;text-indent:20px;width:80px">Market</th>
+    {% for item in info["kbd"]["dates"] %}
+    <th style="width:107px">{{ item }}</th>
+    {% endfor %}
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px">Suffolk</td>
+    {% for item in info["permits"]["Suffolk"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px">Nassau</td>
+    {% for item in info["permits"]["Nassau"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px">Richmond</td>
+    {% for item in info["permits"]["Richmond"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px">Queens</td>
+    {% for item in info["permits"]["Queens"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px;width:80px;font-weight:bold">Total</td>
+    {% for item in info["permits"]["total"] %}
+    <td style="width:107px;font-weight:bold">{{ item }}</td>
+    {% endfor %}
+  </tr>
+</tbody>
+</table>
+
+<div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+  <table class="tablesorter myTable" style="float:left;width:200px;box-shadow:none;font-size:12pt;margin-bottom:10px">
+    <tr>
+      <th style="text-align:left;text-indent:10px;color:red">Sales By Source</th>
+    </tr>
+  </table>
+</div>
+
+<table class="tablesorter myTable" style="margin-bottom:0px;margin-top:0px;margin-bottom:40px">
+  <thead>
+   <tr style="font-weight:bold">
+    <th style="text-align:left;text-indent:20px;width:80px">Source</th>
+    {% for item in info["kbd"]["dates"] %}
+    <th style="width:107px">{{ item }}</th>
+    {% endfor %}
+  </tr>
+</thead>
+<tbody> 
+  <tr>
+    <td colspan="9" style="text-align:left;text-indent:20px;width:80px;font-style:italic;height:40px;vertical-align:bottom">Suffolk</td>
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:30px;width:80px">Amb</td>
+    {% for item in info["Suffolk"]["amb"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+   <tr>
+    <td style="text-align:left;text-indent:30px;width:80px">Events</td>
+    {% for item in info["Suffolk"]["events"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+   <tr>
+    <td style="text-align:left;text-indent:30px;width:80px">Schack</td>
+    {% for item in info["Suffolk"]["schack"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+   <tr>
+    <td style="text-align:left;text-indent:30px;width:80px">HQ</td>
+    {% for item in info["Suffolk"]["hq"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+   <tr>
+    <td style="text-align:left;text-indent:30px;width:80px;font-weight:bold">Subtotal</td>
+    {% for item in info["Suffolk"]["total"] %}
+    <td style="width:107px;font-weight:bold">{{ item }}</td>
+    {% endfor %}
+  </tr>
+   <tr>
+    <td colspan="9" style="text-align:left;text-indent:20px;width:80px;font-style:italic;height:40px;vertical-align:bottom">Nassau</td>
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:30px;width:80px">Amb</td>
+    {% for item in info["Nassau"]["amb"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+   <tr>
+    <td style="text-align:left;text-indent:30px;width:80px">Events</td>
+    {% for item in info["Nassau"]["events"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+   <tr>
+    <td style="text-align:left;text-indent:30px;width:80px">HQ</td>
+    {% for item in info["Nassau"]["hq"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+   <tr>
+    <td style="text-align:left;text-indent:30px;width:80px;font-weight:bold">Subtotal</td>
+    {% for item in info["Nassau"]["total"] %}
+    <td style="width:107px;font-weight:bold">{{ item }}</td>
+    {% endfor %}
+  </tr>
+      <td colspan="9" style="text-align:left;text-indent:20px;width:80px;font-style:italic;height:40px;vertical-align:bottom">Richmond</td>
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:30px;width:80px">Field</td>
+    {% for item in info["Richmond"]["amb"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+   <tr>
+    <td style="text-align:left;text-indent:30px;width:80px">Events</td>
+    {% for item in info["Richmond"]["events"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+   <tr>
+    <td style="text-align:left;text-indent:30px;width:80px">HQ</td>
+    {% for item in info["Richmond"]["hq"] %}
+    <td style="width:107px">{{ item }}</td>
+    {% endfor %}
+  </tr>
+   <tr style="height:40px;vertical-align:top">
+    <td style="text-align:left;text-indent:30px;width:80px;font-weight:bold">Subtotal</td>
+    {% for item in info["Richmond"]["total"] %}
+    <td style="width:107px;font-weight:bold">{{ item }}</td>
+    {% endfor %}
+  </tr>
+</tbody>
+</table>        
+
+</div>
+</div>
+</body>
+</html>

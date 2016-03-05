@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">  
+  <script type="text/javascript" src="/static/js/jquery-latest.js"></script>
+  <script type="text/javascript" src="/static/js/jquery.tablesorter.js"></script>
+  <script type="text/javascript" src="/static/js/javascript.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/css/pods.css">
+  <title>Dashboard: Sales &amp; Ops</title>
+</head>
+<body>
+ <div id="container">
+   <div id="content" style="height:1000px">
+    <div class="table-title" style="height:80px">
+    <div style="width:1000px;height:70px;margin-left:auto;margin-right:auto">
+      <h1 style="margin-top:15px;float:left">Look Ahead: <span style="color:red">This Week</span></h1>
+      <p style="float:right;margin-top:-5px;font-size:12pt;font-weight:bold"><a href="{{ url_for('two_pm') }}">Look Back</a> | Look Ahead<p>
+    </div>
+    </div>
+
+<div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+  <table class="tablesorter myTable" style="float:left;width:200px;box-shadow:none;font-size:12pt">
+    <tr>
+      <th style="text-align:left;text-indent:10px;color:red">Sales Appointments</th>
+    </tr>
+  </table>
+</div>
+<table class="tablesorter myTable" style="margin-bottom:40px;margin-top:0px">
+  <thead>
+   <tr style="font-weight:bold">
+    <th style="text-align:left;text-indent:20px;width:100px">County</th>
+    <th style="width:107px">Monday</th>
+    <th style="width:107px">Tuesday</th>
+    <th style="width:107px">Wednesday</th>
+    <th style="width:107px">Thursday</th>
+    <th style="width:107px">Friday</th>
+    <th style="width:107px">Saturday</th>
+    <th style="width:107px">Sunday</th>
+    <th style="width:107px;text-decoration:underline">Total</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td style="text-align:left;text-indent:20px">Suffolk</td>
+    <td>12</td>
+    <td>16</td>
+    <td>20</td>
+    <td>8</td>
+    <td>3</td>
+    <td>15</td>
+    <td>0</td>
+    <td>74</td>
+
+  </tr>
+   <tr>
+    <td style="text-align:left;text-indent:20px">Nassau</td>
+    <td>18</td>
+    <td>19</td>
+    <td>21</td>
+    <td>11</td>
+    <td>3</td>
+    <td>16</td>
+    <td>0</td>
+    <td>88</td>
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px">Richmond</td>
+    <td>2</td>
+    <td>0</td>
+    <td>2</td>
+    <td>1</td>
+    <td>0</td>
+    <td>2</td>
+    <td>0</td>
+    <td>7</td>
+  </tr>
+    <tr>
+    <td style="text-align:left;text-indent:20px">Queens</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+  </tr>
+  <tr>   
+    <tr style="font-weight:bold">
+    <td style="text-align:left;text-indent:20px">Total</td>
+    <td>32</td>
+    <td>35</td>
+    <td>43</td>
+    <td>20</td>
+    <td>6</td>
+    <td>33</td>
+    <td>0</td>
+    <td>169</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+  <table class="tablesorter myTable" style="float:left;width:200px;box-shadow:none;font-size:12pt">
+    <tr>
+      <th style="text-align:left;text-indent:10px;color:red">CAD Appointments</th>
+    </tr>
+  </table>
+</div>
+<table class="tablesorter myTable" style="margin-bottom:40px;margin-top:0px">
+  <thead>
+   <tr style="font-weight:bold">
+    <th style="text-align:left;text-indent:20px;width:100px">County</th>
+    <th style="width:107px">Monday</th>
+    <th style="width:107px">Tuesday</th>
+    <th style="width:107px">Wednesday</th>
+    <th style="width:107px">Thursday</th>
+    <th style="width:107px">Friday</th>
+    <th style="width:107px">Saturday</th>
+    <th style="width:107px">Sunday</th>
+    <th style="width:107px;text-decoration:underline">Total</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td style="text-align:left;text-indent:20px">Suffolk</td>
+    <td>3</td>
+    <td>4</td>
+    <td>4</td>
+    <td>4</td>
+    <td>4</td>
+    <td>3</td>
+    <td>0</td>
+    <td>22</td>
+
+  </tr>
+   <tr>
+    <td style="text-align:left;text-indent:20px">Nassau</td>
+    <td>3</td>
+    <td>6</td>
+    <td>2</td>
+    <td>5</td>
+    <td>1</td>
+    <td>8</td>
+    <td>0</td>
+    <td>25</td>
+  </tr>
+  <tr>
+    <td style="text-align:left;text-indent:20px">Richmond</td>
+    <td>1</td>
+    <td>1</td>
+    <td>2</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>5</td>
+  </tr>
+    <tr>
+    <td style="text-align:left;text-indent:20px">Queens</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+  </tr>
+  <tr>   
+    <tr style="font-weight:bold">
+    <td style="text-align:left;text-indent:20px">Total</td>
+    <td>7</td>
+    <td>11</td>
+    <td>8</td>
+    <td>9</td>
+    <td>6</td>
+    <td>11</td>
+    <td>0</td>
+    <td>52</td>
+    </tr>
+  </tbody>
+</table>
+
+
+</div>
+</div>
+</body>
+</html>

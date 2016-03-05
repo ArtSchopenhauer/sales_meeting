@@ -1,0 +1,226 @@
+
+.myTable th.headerSortDown { 
+    background: #CCE6FF url(http://tablesorter.com/themes/blue/bg.gif) no-repeat 90%;
+} 
+
+.myTable th.headerSortUp {  
+    background: #CCE6FF url(http://tablesorter.com/themes/blue/bg.gif) no-repeat 90%;
+}
+
+body {
+	background-color: #4a9de2;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Trebuchet MS;
+
+    background: #4a9de2; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #0099e6, #4a9de2); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #0099e6, #4a9de2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        
+}
+
+table {
+    border-collapse: collapse;
+    width: 840px;
+
+}
+
+.myTable th {
+	text-decoration: ;
+    /*background: url(http://tablesorter.com/themes/blue/bg.gif) no-repeat 90%;*/
+}
+
+.navbar {
+    padding-left: auto;
+    padding-right: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#navlink {
+
+    width: 120px;
+    font-size: 10pt;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    height: 40px;
+    border: 1px solid #dddddd;
+    line-height:10px;
+    color: ;
+    float: left;
+}
+
+#navlink-active {
+
+    width: 120px;
+    font-size: 10pt;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: ;
+    height: 40px;
+    border: 1px solid #dddddd;
+    color: white;
+    font-size: 12pt;
+    font-weight: ;
+    text-align: center;
+    line-height:10px;
+    float: left;
+}
+
+
+#navlink p {
+
+    color: black;
+    font-size: 12pt;
+    text-align: center;
+}
+
+.table-title {
+    height: 85px;
+    width: 1000px;
+    font-family: Trebuchet MS;
+	text-indent: ;
+	text-decoration: ; 
+	margin-bottom: 30px;
+	font-size: 10pt;
+	margin-left: auto;
+	margin-right: auto;
+    background-color: ;
+    padding: 1px;
+    width: 100%;
+
+
+/* outer shadows  (note the rgba is red, green, blue, alpha) */
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 1); 
+    -moz-box-shadow: 0px 1px 3px rgba(23, 69, 88, 1);
+
+
+/* gradients */
+    background: -webkit-gradient(linear, left top, left bottom, 
+    color-stop(0%, white), color-stop(10%, white), color-stop(100%, #f5f5f5)); 
+    background: -moz-linear-gradient(top, white 0%, white 55%, #f5f5f5 130%); 
+}
+
+
+.table-title h1 {
+    margin-top: 15px;
+    margin-bottom: 0px;
+    color: #2E2E2E;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table.title h3, span {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #2E2E2E;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.myTable td {
+	/*border-right: 1px solid #dddddd;*/
+    border-collapse: collapse;
+    padding: 3px;
+}
+
+.myTable th {
+    /*border-right: 1px solid #dddddd;*/
+    border-bottom: 1px solid #dddddd;
+    border-collapse: collapse;
+    padding: 4px;
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.table-head {
+    font-family: Trebuchet MS;
+    background-color: #FFFFFF;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 12pt;
+    width: ;
+    text-align: center;
+    text-decoration: ;
+    box-shadow: 1px 1px 1px 1px #999999;
+    margin-bottom: 5px;
+
+}
+
+.table-head th {
+    /*border-right: 1px solid #dddddd;*/
+    border-collapse: collapse;
+    padding: 3px;
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.tablesorter {
+    font-family: Trebuchet MS;
+    background-color: #FFFFFF;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 12pt;
+    width: 1000px;
+    text-align: center;
+
+    box-shadow: 1px 1px 1px 1px #999999;
+}
+
+#tables {
+    width: 840px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#container {
+    min-height: 100%;
+    position: relative;
+}
+
+.formContainer {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    height: 200px;
+    background-color: white;
+    border: 2px solid red;
+}
+
+#content {
+    padding-bottom: 368px;
+}
+
+#footer {
+    text-align: center;
+    font-size: 10pt;
+    font-family: Trebuchet MS;
+    position: absolute;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 25px;
+}
+
+/*
+#op {
+  background-color: #FFFFFF;
+}
+
+#op:hover {
+  background-color: #E0E0E0 ;
+}
+*/
+
+/*.myTable tr:nth-child(odd) {background: #ebebeb}
+/*.myTable tr:nth-child(even) {background: #FFF}
