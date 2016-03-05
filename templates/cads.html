@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">  
+  <link rel="stylesheet" type="text/css" href="/static/css/sm.css">
+  <title>Dashboard: Sales &amp; Ops</title>
+</head>
+<body>
+
+  <div style="height:50px;margin-bottom:50px;width:735px;margin-left:auto;margin-right:auto">
+    <a href="http://104.131.100.182/sm" style="text-decoration:none">
+      <div id="navlink" style="margin-left:auto;float:left">
+        <p>Overview</p>
+      </div>
+    </a>
+    <a href="http://104.236.9.131/sm_amb/suffolk" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>Ambassadors</p>
+      </div>
+    </a>
+    <a href="http://104.131.100.182/closers" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>Closers</p>
+      </div>
+    </a>
+    <a href="" style="text-decoration:none">
+      <div id="navlink-active" style="border-left:none">
+        <p>CAD Results</p>
+      </div>
+    </a>
+    <a href="http://google.com" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>Deal Review</p>
+      </div>
+    </a>
+    <a href="http://google.com" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>This Week</p>
+      </div>
+    </a>
+
+  </div>
+
+<div id="container">
+ <div id="content">
+
+  <div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
+    <table class="tablesorter myTable" id="tabletitle" style="background-color:none;float:left;width:200px;box-shadow:none;font-size:12pt;margin-bottom:10px">
+      <tr>
+        <th style="text-align:left;text-indent:10px;color:red">Last Week</th>
+      </tr>
+    </table>
+  </div>
+
+  <table class="tablesorter myTable" style="margin-bottom:0px;margin-top:0px;margin-bottom:40px">
+    <thead>
+     <tr style="font-weight:bold">
+      <th style="text-align:left;text-indent:20px;width:130px">Account</th>
+      <th style="text-align:center;width:120px">Customer</th>
+      <th style="text-align:center">City</th>
+      <th style="text-align:center;width:120px">Sale Date</th>
+      <th style="text-align:center">Closer</th>
+      <th style="text-align:center">Outcome Date</th>
+      <th style="text-align:center">Status</th>
+      <th style="text-align:center">Permit Submitted?</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in info["Suffolk"] %}
+    <tr>
+      <td style="width:80px;text-align:left;text-indent:30px">{{ item["account_num"] }}</td>
+      <td style="width:80px;text-align:left">{{ item["name"] }}</td>
+      <td style="width:80px;text-align:left">{{ item["city"] }}</td>
+      <td style="width:80px;text-align:left">{{ item["sale_date"] }}</td>
+      <td style="width:80px;text-align:left">{{ item["closer"] }}</td>
+      <td style="width:80px;text-align:left">{{ item["cad_outcome_date"] }}</td>
+      <td style="width:80px;text-align:left;color:red">{{ item["cad_outcome"] }}</td>
+      <td style="width:80px;text-align:left">{{ item["permit_submitted"] }}</td>
+    </tr>    
+    <tr>
+      <td colspan="8" style="text-align:left">{{ item["cad_notes"] }}</td>
+    </tr>
+    <tr>
+      <td style="border-top:1px solid red"><td>
+    <tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+</div>
+</div>
+</body>
+</html>

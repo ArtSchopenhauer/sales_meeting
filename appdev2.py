@@ -79,15 +79,27 @@ class CAD(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     contact_id = db.Column(db.String)
+    account_num = db.Column(db.String)
+    city = db.Column(db.String)
     county = db.Column(db.String)
+    sale_date = db.Column(db.DateTime)
+    closer = db.Column(db.String)
+    cad_closer = db.Column(db.String)
+    cad_sit = db.Column(db.String)
     cad_outcome_date = db.Column(db.DateTime)
     cad_outcome = db.Column(db.String)
     cad_notes = db.Column(db.Text)
 
-    def __init__(self, name, contact_id, county, cad_outcome_date, cad_outcome, cad_notes):
+    def __init__(self, name, contact_id, account_num, city, county, sale_date, closer, cad_closer, cad_sit, cad_outcome_date, cad_outcome, cad_notes):
         self.name = name
         self.contact_id = contact_id
+        self.account_num = account_num
+        self.city = city
         self.county = county
+        self.sale_date = sale_date
+        self.closer = closer
+        self.cad_closer = cad_closer
+        self.cad_sit = cad_sit
         self.cad_outcome_date = cad_outcome_date
         self.cad_outcome = cad_outcome
         self.cad_notes = cad_notes
@@ -397,6 +409,31 @@ def json_closers():
         info[county]["total"]["close_rate"] = "0%"
     return info
 
+def json_cads():
+    info = {"Suffolk": [], "Nassau": [], "Richmond": [], "Missing": []}
+    one_week = datetime.timedelta(days=7)
+    end = get_week_start()
+    start = end - one_week
+    outcomes_lw = CAD.query.filter(sqlalchemy.and_(CAD.cad_outcome_date.between(start, end))).all()
+    for item in outcomes_lw:
+        name = item.name
+        county = item.county
+        account_num = item.account_num
+        city = item.city
+        sale_date = item.sale_date
+        closer = item.closer
+        cad_outcome_date = item.cad_outcome_date
+        cad_outcome = item.cad_outcome
+        cad_notes = item.cad_notes
+        if len(Permit.query.filter(Permit.account_num==account_num).all()) > 0:
+            permit_submitted = "Yes"
+        else:
+            permit_submitted = "No"
+        record = {"account_num": account_num, "name": name, "city": city, "sale_date": sale_date, "closer": closer,
+                  "cad_outcome_date": cad_outcome_date, "cad_outcome": cad_outcome, "cad_notes": cad_notes, "permit_submitted": permit_submitted}
+        info[county].append(record)
+    return info
+
 @app.route("/sm")
 def sm():
     info = json_sm()
@@ -406,6 +443,12 @@ def sm():
 def closers():
     info = json_closers()
     return render_template("closers.html", info=info)
+
+@app.route("/cads")
+def cads():
+    info = json_cads()
+    print info["Suffolk"]
+    return render_template("cads.html", info=info)
 
 @app.route('/', methods=["GET", "POST"])
 def two_pm():

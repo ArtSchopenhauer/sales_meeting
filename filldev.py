@@ -278,33 +278,72 @@ def fill_cad(days_ago):
 	for obj in cad_outcomes:
 		if obj["contact"]:
 			if obj["contact"]["name"]:
-				name_c = obj["contact"]["name"]
+				name = obj["contact"]["name"]
 			else:
-				name_c = "Missing"
+				name = "Missing"
 			if obj["outcome"]:
-				cad_outcome_c = obj["outcome"]
+				cad_outcome = obj["outcome"]
 			else:
-				cad_outcome_c = "Missing"
+				cad_outcome = "Missing"
 			if obj["interaction_date"]:
-				cad_outcome_date_c = dateutil.parser.parse(obj["interaction_date"]).astimezone(est_zone)
+				cad_outcome_date = dateutil.parser.parse(obj["interaction_date"]).astimezone(est_zone)
 			else:
-				cad_outcome_date_c = None
+				cad_outcome_date = None
 			if obj["comments"]:
-				cad_notes_c = obj["comments"]
+				cad_notes = obj["comments"]
 			else:
-				cad_notes_c = "Missing"
-			contact_id_c = obj["contact"]["id"]
-			contact_c = api_response((contacts + "/" + contact_id_c), {}, 0, [], 0)[0]
-			if contact_c:
-				if contact_c["account"]["municipality"]["county"]["name"]:
-					county_c = contact_c["account"]["municipality"]["county"]["name"]
-				else:
-					county_c = "Missing"
-			else:
-				county_c = "Missing"
-			cad_record = CAD(name_c, contact_id_c, county_c, cad_outcome_date_c, cad_outcome_c, cad_notes_c)
-			db.session.add(cad_record)
-			db.session.commit()
+				cad_notes = "Missing"
+			contact_id = obj["contact"]["id"]
+			contact = api_response((contacts + "/" + contact_id), {}, 0, [], 0)[0]
+			if contact:
+				if contact["account"]:
+					if contact["account"]["municipality"]["county"]["name"]:
+						county = contact["account"]["municipality"]["county"]["name"]
+					else:
+						county = "Missing"
+					if " - " in contact["account"]["name"]:
+						city = contact["account"]["name"].split(" - ")[1]
+					else:
+						city = "Missing"
+					if contact["account"]["account_number"]:
+						account_num = contact["account"]["account_number"]
+						print account_num
+						account_id = contact["account"]["id"]
+					else:
+						account_num = "Missing"
+						account_id = "Missing"
+					if account_id != "Missing":
+						cases_response = api_response(cases, {"account": account_id})
+						for item in cases_response:
+							if item["type"]["name"] == "Install":
+								sale_date = dateutil.parser.parse(item["createddate"]).astimezone(est_zone)
+							if item["type"]["name"] == "Sales Document":
+								closer = item["salesRepName"]
+					try:
+						account_num
+					except:
+						account_num = "Missing"
+					try:
+						county
+					except:
+						county = "Missing"
+					try:
+						sale_date
+					except:
+						sale_date = None
+					try:
+						closer
+					except:
+						closer = "Missing"
+					try:
+						city
+					except:
+						city = "Missing"
+					cad_closer = "Missing"
+					cad_sit = "Missing"
+					cad_record = CAD(name, contact_id, account_num, city, county, sale_date, closer, cad_closer, cad_sit, cad_outcome_date, cad_outcome, cad_notes)
+					db.session.add(cad_record)
+					db.session.commit()
 
 
 # removes duplicate outcomes from CAD table for a given customer, leaving the most recent
@@ -567,6 +606,10 @@ def refresh_db():
 	clean_permit_db()
 	clean_cad_db()
 	clean_appointment_db()
+
+CAD.query.delete()
+fill_cad(10)
+clean_cad_db()
 
 #refresh_db()
 
