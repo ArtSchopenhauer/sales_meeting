@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">  
+  <link rel="stylesheet" type="text/css" href="/static/css/sm.css">
+  <title>Dashboard: Sales &amp; Ops</title>
+</head>
+<body>
+
+  <div style="height:50px;margin-bottom:0px;width:735px;margin-left:auto;margin-right:auto">
+    <a href="http://104.131.100.182/sm" style="text-decoration:none">
+      <div id="navlink" style="margin-left:auto;float:left">
+        <p>Overview</p>
+      </div>
+    </a>
+    <a href="http://104.236.9.131/sm_amb/suffolk" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>Ambassadors</p>
+      </div>
+    </a>
+    <a href="http://104.131.100.182/closers" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>Closers</p>
+      </div>
+    </a>
+    <a href="" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>CAD Results</p>
+      </div>
+    </a>
+    <a href="http://google.com" style="text-decoration:none">
+      <div id="navlink-active" style="border-left:none">
+        <p>Deal Review</p>
+      </div>
+    </a>
+    <a href="http://google.com" style="text-decoration:none">
+      <div id="navlink" style="border-left:none">
+        <p>This Week</p>
+      </div>
+    </a>
+
+  </div>
+
+ <div style="height:50px;margin-bottom:20px;width:735px;margin-left:auto;margin-right:auto">
+      <div id="navlink" style="margin-left:auto;float:left;border:none;background-color:transparent">
+        <p></p>
+      </div>
+      <div id="navlink" style="border:none;background-color:transparent">
+        <p></p>
+      </div>
+      <div id="navlink" style="border:none;background-color:transparent">
+        <p></p>
+      </div>
+      <div id="navlink" style="border:none;background-color:transparent;height:20px">
+        <p style="color:white;font-size:10pt;margin-top:3px"></p>
+      </div>
+      <div id="navlink" style="border:none;background-color:transparent">
+        <p style="color:white;font-size:10pt;margin-top:3px">&nbsp;&nbsp;Year To Date</p>
+      </div>
+      <div id="navlink" style="border:none;background-color:transparent">
+        <p></p>
+      </div>
+
+  </div>
+
+<div id="container">
+ <div id="content">
+
+    <div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;">
+
+       <table class="tablesorter myTable" id="tabletitle" style="background-color:none;float:right;width:170px;box-shadow:none;font-size:12pt;margin-bottom:20px">
+      <tr>
+        <th colspan="2">Shown Below:</th>
+      </tr>
+      <tr>
+        <th style="border-bottom:none">Deals</th>
+        <th style="border-bottom:none">G2G</th>
+      </tr>
+      <tr>
+        <td>{{ info["summary"]["sales"] }}</td>
+        <td>{{ info["summary"]["g2g"] }}</td>
+      </tr>
+
+    </table>
+
+
+      <form action="/deals" method="post" style="width:500px">
+
+         <select name="county" style="width:140px;height:30px;float:left;border: 1px solid white;font-family:Trebuchet MS;text-indent:5px;margin-bottom:10px">
+        <option value="All Counties" disable selected>Select County...</option>
+        <option value="All Counties">All Counties</option>
+        <option value="Suffolk">Suffolk</option>
+        <option value="Nassau">Nassau</option>
+        <option value="Richmond">Richmond</option>
+      </select>
+      <select name="status" style="margin-left:10px;width:140px;height:30px;border: 1px solid white;font-family:Trebuchet MS;text-indent:5px;margin-bottom:0px">
+        <option value="All Statuses" disable selected>Select Status...</option>
+        <option value="All Deals">All Deals</option>
+        <option value="Good To Go">G2G</option>
+        <option value="Not G2G">Not G2G</option>
+      </select>
+      <select name="closer" style="margin-left:5px;width:140px;height:30px;border: 1px solid white;font-family:Trebuchet MS;text-indent:5px;margin-bottom:0px">
+        <option value="All Closers" disable selected>Select Closer...</option>
+        <option value="All Closers">All Closers</option>
+        <option value="Anthony Quezada">Anthony Quezada</option>
+        <option value="Brandon Parlante">Brandon Parlante</option>
+          <option value="Jonathan Cohen">Jonathan Cohen</option>
+        <option value="Josh Lilly">Josh Lilly</option>
+          <option value="Mark Campbell">Mark Campbell</option>
+        <option value="Richard Kahn">Richard Kahn</option>
+          <option value="Steven Cook">Steven Cook</option>
+        <option value="Steven Elliott">Steven Elliott</option>
+          <option value="Taylor Colucci">Taylor Colucci</option>
+        <option value="Tyler Rhoton">Tyler Rhoton</option>
+      </select>
+
+  </div>
+  <div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:20px;">
+     <button style="float:left" type="submit">Go</button>
+      <p style="text-indent:20px;color:white">Selected: {{ county }}, {{ status }}, {{ closer }}<p>
+  </div>
+  </form>
+
+{% for deal in info["deals"] %}
+<div style="margin-left:auto;margin-right:auto;width:1000px">
+  <table class="tablesorter myTable" style="width:1000px;margin-top:0px;margin-bottom:10px;font-size:10pt">
+    <thead>
+     <tr style="font-weight:bold">
+      <th style="text-align:left;text-indent:10px;width:40px">Account</th>
+      <th style="text-align:left;width:120px">Customer</th>
+      <th style="text-align:left;width:130px">City</th>
+      <th style="text-align:left;width:40px">Date Sold</th>
+      <th style="text-align:left;width:120px">Closer</th>
+      <th style="text-align:left;width:100px">CAD Outcome</th>
+      <th style="text-align:left;width:100px">CAD Specialist</th>
+      <th style="text-align:left;width:120px">Status</th>
+      <th style="text-align:left;width:120px">Permit Submitted?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width:80px;text-align:left;text-indent:10px">{{ deal.account_num }}</td>
+      <td style="width:80px;text-align:left">{{ deal.name }}</td>
+      <td style="width:80px;text-align:left">{{ deal.city }}</td>
+      <td style="width:80px;text-align:left">{{ deal.sale_date }}</td>
+      <td style="width:80px;text-align:left">{{ deal.closer }}</td>
+      <td style="width:80px;text-align:left">{{ deal.cad_outcome_date }}</td>
+      <td style="width:80px;text-align:left">{{ deal.cad_closer }}</td>
+      <td style="width:80px;text-align:left;color:red">{{ deal.cad_outcome }}</td>
+      <td style="width:80px;text-align:left">{{ deal.permit_submitted }}</td>
+    </tr>    
+    <tr>
+      <td colspan="9" style="text-align:left;padding-top:20px;padding-bottom:5px"><span style="font-weight:bold">Last Note ({{ deal.cad_outcome_date }}): </span>{{ deal.cad_notes }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+{% endfor %}
+
+</div>
+</div>
+</body>
+</html>

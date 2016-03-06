@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <div style="height:50px;margin-bottom:50px;width:735px;margin-left:auto;margin-right:auto">
+  <div style="height:50px;margin-bottom:0px;width:735px;margin-left:auto;margin-right:auto">
     <a href="http://104.131.100.182/sm" style="text-decoration:none">
       <div id="navlink" style="margin-left:auto;float:left">
         <p>Overview</p>
@@ -42,19 +42,41 @@
 
   </div>
 
+ <div style="height:50px;margin-bottom:30px;width:735px;margin-left:auto;margin-right:auto">
+      <div id="navlink" style="margin-left:auto;float:left;border:none;background-color:transparent">
+        <p></p>
+      </div>
+      <div id="navlink" style="border:none;background-color:transparent">
+        <p></p>
+      </div>
+      <div id="navlink" style="border:none;background-color:transparent">
+        <p></p>
+      </div>
+      <div id="navlink" style="border:none;background-color:transparent;height:20px">
+        <p style="color:white;font-size:10pt;margin-top:3px">Last Week</p>
+      </div>
+      <div id="navlink" style="border:none;background-color:transparent">
+        <p></p>
+      </div>
+      <div id="navlink" style="border:none;background-color:transparent">
+        <p></p>
+      </div>
+
+  </div>
+
 <div id="container">
  <div id="content">
 
   <div style="width:1000px;margin-left:auto;margin-right:auto;margin-bottom:10px;height:30px">
 
-       <table class="tablesorter myTable" style="width:200px;float:left;font-weight:none;margin-bottom:30px">
+       <table class="tablesorter myTable" style="box-shadow:none;width:200px;float:left;font-weight:none;margin-bottom:30px">
                     <tbody>
                         <tr>
-                            <td style="height:30px;font-weight:bold;box-shadow:none">Suffolk | <a href="">Nassau</a></td>
+                            <td style="height:30px;font-weight:bold;box-shadow:none">Suffolk | <a href="{{ url_for('cads_nassau') }}">Nassau</a></td>
                         <tr>
                     </tbody>
                 </table>
-
+ 
 
     <table class="tablesorter myTable" id="tabletitle" style="background-color:none;float:right;width:170px;box-shadow:none;font-size:12pt;margin-bottom:10px">
       <tr>
@@ -99,7 +121,7 @@
       <td style="width:80px;text-align:left">{{ item["permit_submitted"] }}</td>
     </tr>    
     <tr>
-      <td colspan="9" style="text-align:left;padding-top:20px;padding-bottom:5px">{{ item["cad_notes"] }}</td>
+      <td colspan="9" style="text-align:left;padding-top:20px;padding-bottom:5px"><span style="font-weight:bold">Last Note: </span>{{ item["cad_notes"] }}</td>
     </tr>
   </tbody>
 </table>

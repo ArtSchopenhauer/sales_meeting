@@ -267,6 +267,20 @@ def fill_pipeline(days_ago):
 				else:
 					closer = "Missing"
 				hq_notes = "None"
+				if cad_outcome == "goodtogo":
+					cad_outcome = "Good To Go"
+				elif cad_outcome == "moretime-complete":
+					cad_outcome = "NMT - Have Docs"
+				elif cad_outcome == "moretime-incomplete":
+					cad_outcome = "NMT - Need Docs"
+				elif cad_outcome == "cancel":
+					cad_outcome = "Cancelled"
+				elif cad_outcome == "postponed":
+					cad_outcome = "Postponed"
+				elif cad_outcome == "designchange":
+					cad_outcome = "Design Change"
+				elif cad_outcome == "noshow":
+					cad_outcome = "No Show"
 			record = Pipeline(account_id, account_num, name, street_address, city, zip_code, county, municipality, phone, sale_date, closer, site_survey,
                  roof_pass, design_done, cad_appt_date, cad_outcome_date, cad_closer, cad_outcome, cad_notes, permit_submitted, permit_received, installed, hq_notes)
 			db.session.add(record)
@@ -274,6 +288,7 @@ def fill_pipeline(days_ago):
 
 def fill_cad(days_ago):
 	start = datetime_iso(days_ago)
+	cad_sit_options = ["Good To Go", "NMT - Have Docs", "NMT - Need Docs", "Design Change"]
 	cad_outcomes = api_response(interactions, {"subject": "CAD Appointment Outcome"}, start, [], 0)
 	for obj in cad_outcomes:
 		if obj["contact"]:
@@ -283,6 +298,20 @@ def fill_cad(days_ago):
 				name = "Missing"
 			if obj["outcome"]:
 				cad_outcome = obj["outcome"]
+				if cad_outcome == "goodtogo":
+					cad_outcome = "Good To Go"
+				elif cad_outcome == "moretime-complete":
+					cad_outcome = "NMT - Have Docs"
+				elif cad_outcome == "moretime-incomplete":
+					cad_outcome = "NMT - Need Docs"
+				elif cad_outcome == "cancel":
+					cad_outcome = "Cancelled"
+				elif cad_outcome == "postponed":
+					cad_outcome = "Postponed"
+				elif cad_outcome == "designchange":
+					cad_outcome = "Design Change"
+				elif cad_outcome == "noshow":
+					cad_outcome = "No Show"
 			else:
 				cad_outcome = "Missing"
 			if obj["interaction_date"]:
@@ -303,6 +332,8 @@ def fill_cad(days_ago):
 						county = "Missing"
 					if " - " in contact["account"]["name"]:
 						city = contact["account"]["name"].split(" - ")[1]
+						if city == "Port Jefferson Station":
+							city = "Port Jefferson"
 					else:
 						city = "Missing"
 					if contact["account"]["account_number"]:
@@ -340,7 +371,10 @@ def fill_cad(days_ago):
 					except:
 						city = "Missing"
 					cad_closer = "Missing"
-					cad_sit = "Missing"
+					if cad_outcome in cad_sit_options:
+						cad_sit = "Yes"
+					else:
+						cad_sit = "No"
 					cad_record = CAD(name, contact_id, account_num, city, county, sale_date, closer, cad_closer, cad_sit, cad_outcome_date, cad_outcome, cad_notes)
 					db.session.add(cad_record)
 					db.session.commit()

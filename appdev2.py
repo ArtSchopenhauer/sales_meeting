@@ -410,7 +410,12 @@ def json_closers():
     return info
 
 def json_cads():
-    info = {"Suffolk": [], "Nassau": [], "Richmond": [], "Missing": []}
+    info = {"Suffolk": {"sits": 0, "g2g": 0, "g2g_rate": 0, "outcomes": []},
+            "Nassau": {"sits": 0, "g2g": 0, "g2g_rate": 0, "outcomes": []},
+            "Richmond": {"sits": 0, "g2g": 0, "g2g_rate": 0, "outcomes": []},
+            "Missing": {"sits": 0, "g2g": 0, "g2g_rate": 0, "outcomes": []}
+            }
+    counties = ["Suffolk", "Nassau", "Richmond", "Missing"]
     one_week = datetime.timedelta(days=7)
     end = get_week_start()
     start = end - one_week
@@ -420,19 +425,87 @@ def json_cads():
         county = item.county
         account_num = item.account_num
         city = item.city
-        sale_date = item.sale_date
+        sale_date = (str(item.sale_date.month) + "/" + str(item.sale_date.day))
         closer = item.closer
-        cad_outcome_date = item.cad_outcome_date
+        cad_outcome_date = (str(item.cad_outcome_date.month) + "/" + str(item.cad_outcome_date.day))
         cad_outcome = item.cad_outcome
+        if cad_outcome == "Good To Go":
+            order = 1
+        else:
+            order = 2
         cad_notes = item.cad_notes
+        cad_closer = "Sarah Krolus"
         if len(Permit.query.filter(Permit.account_num==account_num).all()) > 0:
             permit_submitted = "Yes"
         else:
             permit_submitted = "No"
+        cad_sit = item.cad_sit
+        if cad_sit == "Yes":
+            info[county]["sits"] += 1
+        if cad_outcome == "Good To Go":
+            info[county]["g2g"] += 1
         record = {"account_num": account_num, "name": name, "city": city, "sale_date": sale_date, "closer": closer,
-                  "cad_outcome_date": cad_outcome_date, "cad_outcome": cad_outcome, "cad_notes": cad_notes, "permit_submitted": permit_submitted}
-        info[county].append(record)
+                  "cad_outcome_date": cad_outcome_date, "cad_closer": cad_closer, "cad_outcome": cad_outcome, "cad_notes": cad_notes,
+                  "permit_submitted": permit_submitted, "order": order}
+        info[county]["outcomes"].append(record)
+    for county in counties:
+        info[county]["outcomes"] = sorted(info[county]["outcomes"], key=itemgetter("order"))
+        if info[county]["sits"] > 0:
+            info[county]["g2g_rate"] = "{0:.0f}%".format((float(info[county]["g2g"])/float(info[county]["sits"]))*100)
+        else:
+            info[county]["g2g_rate"] = "0%"
     return info
+
+def append_deal(deal, json):
+        if deal.cad_outcome_date:
+            deal.cad_outcome_date = (str(deal.cad_outcome_date.month) + "/" + str(deal.cad_outcome_date.day))
+        if deal.sale_date:
+            deal.sale_date = (str(deal.sale_date.month) + "/" + str(deal.sale_date.day))
+        if deal.permit_submitted:
+            deal.permit_submitted = "Yes"
+        else:
+            deal.permit_submitted = "No"
+        if deal.cad_outcome == "goodtogo" or deal.cad_outcome == "Good To Go":
+            json["summary"]["g2g"] += 1
+        json["summary"]["sales"] += 1
+        json["deals"].append(deal)
+
+
+def json_deals(county, closer, status):
+    info = {"deals": [], "summary": {"sales": 0, "g2g": 0}}
+    if county == "All Counties" and closer == "All Closers":
+        deals = Pipeline.query.all()
+    elif county == "All Counties":
+        deals = Pipeline.query.filter(Pipeline.closer==closer).all()
+    elif closer == "All Closers":
+        deals = Pipeline.query.filter(Pipeline.county==county)
+    else:
+        deals = Pipeline.query.filter(Pipeline.county==county, Pipeline.closer==closer)
+    for deal in deals:
+        if status == "Good To Go":
+            if deal.cad_outcome == "goodtogo" or deal.cad_outcome == "Good To Go":
+                append_deal(deal, info)
+        elif status == "Not G2G":
+            if deal.cad_outcome != "goodtogo" and deal.cad_outcome != "Good To Go":
+                append_deal(deal, info)
+        else:
+            append_deal(deal, info)
+    return info
+
+@app.route('/deals', methods=["GET", "POST"])
+def deals():
+    if request.method == "POST":
+        county = request.form["county"]
+        closer = request.form["closer"]
+        status = request.form["status"]
+        info = json_deals(county, closer, status)
+        return render_template("deal_review.html", info=info, closer=closer, county=county, status=status)
+    else:
+        county = "All Counties"
+        closer = "All Closers"
+        status = "All Deals"
+        info = json_deals(county, closer, status)
+        return render_template("deal_review.html", info=info, closer=closer, county=county, status=status)
 
 @app.route("/sm")
 def sm():
@@ -444,11 +517,15 @@ def closers():
     info = json_closers()
     return render_template("closers.html", info=info)
 
-@app.route("/cads")
-def cads():
+@app.route("/cads/suffolk")
+def cads_suffolk():
     info = json_cads()
-    print info["Suffolk"]
-    return render_template("cads.html", info=info)
+    return render_template("cads_suffolk.html", info=info)
+
+@app.route("/cads/nassau")
+def cads_nassau():
+    info = json_cads()
+    return render_template("cads_nassau.html", info=info)
 
 @app.route('/', methods=["GET", "POST"])
 def two_pm():
